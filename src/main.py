@@ -8,35 +8,36 @@ Note to self: Running into a bug where letters arent being removed from the Avai
 
 
 '''Global variables'''
-Available_Letters = 'ABCDEFGHIJKLMNOPQRSTUVXWYZ'
 WORD_LIST = ['Tiger','Cloud', 'Ocean', 'Chair', 'Ghost', 'Knife', 'Mouse', 'Plant', 'Queen', 'Radar', 'Stone', 'Brush', 'Apple',
             'Toast', 'Wagon', 'Llama', 'House', 'Clown', 'Crane', 'Flame']
 LIVES = 5
 
-def shared_letters(user_word, actual_word, unavailable_letters) -> list:
-    cap_word = user_word.upper()
-    guess = [*cap_word]
+def remove_irrelevant_letters():
+    print("P")
+
+def shared_letters(user_word, actual_word) -> list:
+    guess = [*user_word]
     answer = [*actual_word]
-    unavailable = [*unavailable_letters]
+    unavailable = []
     shared = []
 
     for i in range(len(answer)):
         '''If the elements match they are added to the list named shared'''
         if guess[i] == answer[i]:
             shared.append(answer[i])
-        else:
-            unavailable.remove(guess[i])
+        elif guess[i] != answer[i]:
+            unavailable.append(answer[i])
             shared.append('-')
 
     return shared,unavailable
 
-def wordle(word):
+def wordle(word, letters):
 
     '''Just a place holder to see the picked word to ensure that the algorithm is preforming as intended'''
     print(word)
 
     for i in range(LIVES):
-        show, new_avail = shared_letters('house',word, Available_Letters)
+        show, new_avail = shared_letters('HOUSE',word)
         print(show)
         print(new_avail)        
 
@@ -56,9 +57,11 @@ def word_picker() -> str:
     return word.upper()
 
 def main():
-    print ("All available letters are: " + Available_Letters)
+    Available_Letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','W','Y','Z']
+    print ("All available letters are: ")
+    print(*Available_Letters, sep = ", ")
     picked_word = word_picker() 
-    wordle( picked_word )
+    wordle( picked_word, Available_Letters )
 
 if __name__ == '__main__':
     main()

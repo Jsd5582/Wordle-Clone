@@ -2,9 +2,6 @@
 
 import random
 
-"""
-Note to self: Running into a bug where letters arent being removed from the Available letters list even if they aren't in the answer word. Check the loop in lines 23-29.
-"""
 
 
 '''Global variables'''
@@ -13,6 +10,16 @@ WORD_LIST = ['Tiger','Cloud', 'Ocean', 'Chair', 'Ghost', 'Knife', 'Mouse', 'Plan
 LIVES = 5
 
 def remove_irrelevant_letters(useless_letters, all_letters) -> list:
+    """
+    Purpose:
+
+    Args:
+        useless_letters:
+        all_letters:
+
+    Return:
+    """
+
     for i in useless_letters[:]:
         if i in all_letters:
             all_letters.remove(i)
@@ -20,6 +27,16 @@ def remove_irrelevant_letters(useless_letters, all_letters) -> list:
     return all_letters
 
 def shared_letters(user_word, actual_word) -> list:
+    """
+    Purpose:
+
+    Args:
+        user_word:
+        actual_word:
+    
+    Return:
+    """
+
     guess = [*user_word]
     answer = [*actual_word]
     unavailable = []
@@ -36,6 +53,17 @@ def shared_letters(user_word, actual_word) -> list:
     return shared,unavailable
 
 def wordle(word, letters):
+    """
+    Purpose:
+
+    Args:
+        word:
+        letters:
+    
+    Return:
+
+    
+    """
 
     '''Just a place holder to see the picked word to ensure that the algorithm is preforming as intended'''
     print(word)
@@ -56,6 +84,7 @@ def word_picker() -> str:
     Return:
         The randomly picked word from the list of available words
     '''
+    
     max = len(WORD_LIST)
     word = WORD_LIST[random.randint(0,max)]
     

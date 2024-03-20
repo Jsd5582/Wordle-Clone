@@ -12,8 +12,12 @@ WORD_LIST = ['Tiger','Cloud', 'Ocean', 'Chair', 'Ghost', 'Knife', 'Mouse', 'Plan
             'Toast', 'Wagon', 'Llama', 'House', 'Clown', 'Crane', 'Flame']
 LIVES = 5
 
-def remove_irrelevant_letters():
-    print("P")
+def remove_irrelevant_letters(useless_letters, all_letters) -> list:
+    for i in useless_letters[:]:
+        if i in all_letters:
+            all_letters.remove(i)
+    
+    return all_letters
 
 def shared_letters(user_word, actual_word) -> list:
     guess = [*user_word]
@@ -39,7 +43,9 @@ def wordle(word, letters):
     for i in range(LIVES):
         show, new_avail = shared_letters('HOUSE',word)
         print(show)
-        print(new_avail)        
+        new_avail = remove_irrelevant_letters(new_avail, letters)
+        print(new_avail)
+
 
 def word_picker() -> str:
     '''

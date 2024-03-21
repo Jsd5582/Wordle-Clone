@@ -11,13 +11,15 @@ LIVES = 5
 
 def remove_irrelevant_letters(useless_letters, all_letters) -> list:
     """
-    Purpose:
+    Purpose: Remove all the unused letters collected in the useless_letters list from the all_letters list
+             to keep trace of all the relavent letters
 
     Args:
-        useless_letters:
-        all_letters:
+        useless_letters: A list of letters used from the users latest guess that are not in the answer word
+        all_letters: A list of all the letters that can still be used to form a guess
 
     Return:
+        An updated list of all the letters that the user can still use
     """
 
     for i in useless_letters[:]:
@@ -28,13 +30,15 @@ def remove_irrelevant_letters(useless_letters, all_letters) -> list:
 
 def shared_letters(user_word, actual_word) -> list:
     """
-    Purpose:
+    Purpose: Determine the shared letters between the word guessed by the user and the actual word
 
     Args:
-        user_word:
-        actual_word:
+        user_word: The word that the user guessed
+        actual_word: The actual answer word
     
     Return:
+        shared: A list of all the shared between the user entered word and the answer
+        unavailable: A list of all the letters from the user word that is not in the answer
     """
 
     guess = [*user_word]
@@ -46,30 +50,32 @@ def shared_letters(user_word, actual_word) -> list:
         '''If the elements match they are added to the list named shared'''
         if guess[i] == answer[i]:
             shared.append(answer[i])
+        #To check if the letter is in the word but not in the correct place can be determined via another elfi
         elif guess[i] != answer[i]:
-            unavailable.append(answer[i])
+            unavailable.append(guess[i])
             shared.append('-')
 
     return shared,unavailable
 
-def wordle(word, letters):
+def wordle(actual_word,letters):
     """
-    Purpose:
+    Purpose: The main program of the game
 
     Args:
-        word:
-        letters:
+        actual_word: The answer word
+        user_word: The guessed word
+        letters: A list of available letters
     
     Return:
-
-    
+        None
     """
 
     '''Just a place holder to see the picked word to ensure that the algorithm is preforming as intended'''
-    print(word)
+    print(actual_word)
 
     for i in range(LIVES):
-        show, new_avail = shared_letters('HOUSE',word)
+        user_word = input("Enter a word: ")
+        show, new_avail = shared_letters(user_word,actual_word)
         print(show)
         new_avail = remove_irrelevant_letters(new_avail, letters)
         print(new_avail)
@@ -84,7 +90,7 @@ def word_picker() -> str:
     Return:
         The randomly picked word from the list of available words
     '''
-    
+
     max = len(WORD_LIST)
     word = WORD_LIST[random.randint(0,max)]
     

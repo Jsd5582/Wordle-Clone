@@ -57,6 +57,7 @@ def shared_letters(user_word, actual_word) -> list:
         elif guess[i] not in answer[i]:
             unavailable.append(guess[i])
             shared.append('-')
+    
 
     return shared,unavailable
 
@@ -79,10 +80,10 @@ def wordle(actual_word,letters):
     for i in range(LIVES):
         user_word = input("Enter a word: ")
         show, new_avail = shared_letters(user_word,actual_word)
-        print(show)
+        guess_str = ''.join(show)
+        print(guess_str)
         new_avail = remove_irrelevant_letters(new_avail, letters)
         print(new_avail)
-        guess_str = ''.join(show)
         if actual_word == guess_str:
             print("Winner")
             break

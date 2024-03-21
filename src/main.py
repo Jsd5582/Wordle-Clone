@@ -47,12 +47,14 @@ def shared_letters(user_word, actual_word) -> list:
     shared = []
 
     for i in range(len(answer)):
-        '''If the elements match they are added to the list named shared'''
+        # If both letters are the same at the same index
         if guess[i] == answer[i]:
             shared.append(answer[i])
+        # If the letter in the guess word exists within the answer
         elif guess[i] in answer:
             shared.append('-')
-        elif guess[i] != answer[i]:
+        # If the letter in the guess would isn't in the answer at all
+        elif guess[i] not in answer[i]:
             unavailable.append(guess[i])
             shared.append('-')
 
@@ -80,6 +82,10 @@ def wordle(actual_word,letters):
         print(show)
         new_avail = remove_irrelevant_letters(new_avail, letters)
         print(new_avail)
+        guess_str = ''.join(show)
+        if actual_word == guess_str:
+            print("Winner")
+            break
 
 
 def word_picker() -> str:

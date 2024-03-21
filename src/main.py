@@ -50,7 +50,8 @@ def shared_letters(user_word, actual_word) -> list:
         '''If the elements match they are added to the list named shared'''
         if guess[i] == answer[i]:
             shared.append(answer[i])
-        #To check if the letter is in the word but not in the correct place can be determined via another elfi
+        elif guess[i] in answer:
+            shared.append('-')
         elif guess[i] != answer[i]:
             unavailable.append(guess[i])
             shared.append('-')
